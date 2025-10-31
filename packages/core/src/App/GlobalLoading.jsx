@@ -148,7 +148,7 @@ export const GlobalLoading = () => {
     // Calculate progress bar width with a minimum of 10% for better visibility
     const progressWidth = Math.max(10, progress);
 
-    const getTextStyle = (type: string) => {
+    const getTextStyle = (type) => {
         switch (type) {
             case 'partnership':
                 return styles.partnershipText;
