@@ -63,8 +63,6 @@
                 flex-wrap: nowrap;
                 min-width: max-content; /* Ensure the tabs container takes full width */
                 overflow-x: auto; /* Add horizontal scrolling if needed */
-                flex-wrap: nowrap;
-                min-width: max-content; /* Ensure the tabs container takes full width */
 
                 @include mobile-or-tablet-screen {
                     overflow-x: auto;
