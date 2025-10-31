@@ -1,4 +1,5 @@
-.global-loading {
+// Base styles
+.globalLoading {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,92 +8,190 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--background, #111827);
+    background: var(--background, #0F172A);
     z-index: 9999;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: var(--text, #f9fafb);
+    color: var(--text, #F8FAFC);
+    overflow: hidden;
 
-    .loading-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        padding: 2rem;
-        max-width: 300px;
-        width: 90%;
-        text-align: center;
+    // Smooth transitions
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
+}
 
-    .logo-container {
-        .logo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            filter: brightness(1.2);
-        }
-    }
+// Loading container
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
 
-    .progress-section {
+// Logo container
+.logoContainer {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    will-change: transform;
+    
+    .logo {
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.2));
+        user-select: none;
+    }
+}
 
-        .progress-bar-container {
-            width: 100%;
+// Progress bar container
+.progressContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
 
-            .progress-bar-background {
-                width: 100%;
-                height: 6px;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 3px;
-                overflow: hidden;
-                margin-bottom: 0.5rem;
-            }
+// Progress bar
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background: var(--surface, #1E293B);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
 
-            .progressBarFill {
-                height: 100%;
-                border-radius: 3px;
-                transition: width 0.1s ease;
-                box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
-            }
+// Progress fill with gradient and animation
+.progressFill {
+    height: 100%;
+    width: 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, 
+        var(--primary, #4F46E5) 0%, 
+        var(--accent, #06B6D4) 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
+    will-change: width;
+    
+    // Glow effect
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0.1) 100%
+        );
+        animation: shimmer 2s infinite linear;
+        transform: translateX(-100%);
+    }
+}
 
-            .progressText {
-                font-size: 0.875rem;
-                color: var(--text);
-                font-weight: 600;
-                text-align: center;
-            }
-        }
+// Progress text
+.progressText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text, #F8FAFC);
+    margin-top: 0.5rem;
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-        .loadingText {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+// Loading text with animated dots
+.loadingText {
+    color: var(--text, #94A3B8);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .loadingDots {
+        display: inline-flex;
+        gap: 0.25rem;
+        
+        span {
+            display: inline-block;
+            animation: bounce 1.4s infinite ease-in-out both;
+            
+            &:nth-child(1) { animation-delay: 0s; }
+            &:nth-child(2) { animation-delay: 0.2s; }
+            &:nth-child(3) { animation-delay: 0.4s; }
         }
     }
+}
 
-    @media (max-width: 768px) {
-        .loadingContainer {
-            gap: 1.5rem;
-            max-width: 250px;
-        }
+// Animations
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
 
-        .logoContainer .logo {
-            width: 50px;
-            height: 50px;
-        }
+@keyframes bounce {
+    0%, 80%, 100% { 
+        transform: translateY(0);
+    }
+    40% { 
+        transform: translateY(-6px);
+    }
+}
 
-        .progressSection {
-            gap: 0.8rem;
+// Responsive styles
+@media (max-width: 768px) {
+    .loadingContainer {
+        padding: 1.5rem;
+        max-width: 320px;
+    }
+    
+    .logoContainer {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .progressBar {
+        height: 6px;
+    }
+    
+    .progressText {
+        font-size: 1.25rem;
+    }
+    
+    .loadingText {
+        font-size: 0.875rem;
+    }
+}
 
-            .progressBarContainer .progressText {
-                font-size: 0.8rem;
-            }
-
-            .loadingText {
-                font-size: 0.8rem;
-            }
-        }
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+    .progressBar {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    .progressFill {
+        box-shadow: 0 0 20px rgba(79, 70, 229, 0.6);
     }
 }
