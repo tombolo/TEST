@@ -21,33 +21,42 @@ export const GlobalLoading = () => {
     };
 
     useEffect(() => {
-        // Smooth progress animation with easing
-        let start = 0;
-        const duration = 3000; // 3 seconds total
-        const steps = 100;
-        const stepTime = duration / steps;
+        // Smooth progress animation with easing over 15 seconds
+        const duration = 15000; // 15 seconds total
+        const startTime = Date.now();
+        let animationFrame;
         
         const animate = () => {
-            start++;
-            const progress = Math.min(100, (start / steps) * 100);
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration * 100, 100);
             
-            // Ease out function for smooth deceleration
-            const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-            const easedProgress = easeOut(progress / 100) * 100;
+            // Custom easing function for natural feel
+            const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+            const easedProgress = easeOutQuart(progress / 100) * 100;
             
             setProgress(Math.min(easedProgress, 100));
             
             if (progress < 100) {
-                setTimeout(animate, stepTime);
+                animationFrame = requestAnimationFrame(animate);
             } else {
-                setTimeout(() => setIsComplete(true), 500);
+                // Add a slight delay before completing
+                setTimeout(() => setIsComplete(true), 800);
             }
         };
         
-        const timer = setTimeout(animate, stepTime);
+        // Start the animation
+        animationFrame = requestAnimationFrame(animate);
+        
+        // Add some random micro-stutters for realism
+        const stutterInterval = setInterval(() => {
+            if (Math.random() > 0.7) {
+                setProgress(prev => Math.max(prev - Math.random() * 0.5, 0));
+            }
+        }, 200);
         
         return () => {
-            clearTimeout(timer);
+            cancelAnimationFrame(animationFrame);
+            clearInterval(stutterInterval);
         };
     }, []);
 
@@ -124,19 +133,42 @@ export const GlobalLoading = () => {
                                 <motion.div 
                                     className={styles.progressFill}
                                     initial={{ width: 0 }}
-                                    animate={{ width: `${progressWidth}%` }}
-                                    transition={{ 
-                                        type: 'spring',
-                                        damping: 15,
-                                        stiffness: 100
+                                    animate={{ 
+                                        width: `${progressWidth}%`,
+                                        transition: {
+                                            duration: 0.3,
+                                            ease: [0.4, 0, 0.2, 1]
+                                        }
                                     }}
                                 >
-                                    <div className={styles.progressGlow} />
+                                    <div className={styles.progressTip} />
                                 </motion.div>
                             </div>
-                            <div className={styles.progressText}>
+                            <motion.div 
+                                className={styles.progressText}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ 
+                                    opacity: 1, 
+                                    y: 0,
+                                    transition: { delay: 0.3 }
+                                }}
+                            >
                                 {Math.round(progress)}%
-                            </div>
+                                <motion.span 
+                                    className={styles.percentSign}
+                                    animate={{ 
+                                        opacity: [0.6, 1, 0.6],
+                                        scale: [1, 1.1, 1]
+                                    }}
+                                    transition={{ 
+                                        duration: 2, 
+                                        repeat: Infinity,
+                                        ease: 'easeInOut'
+                                    }}
+                                >
+                                    %
+                                </motion.span>
+                            </motion.div>
                         </div>
 
                         {/* Loading Text with Animation */}
