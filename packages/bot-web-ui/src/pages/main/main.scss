@@ -21,6 +21,8 @@
     &__container {
         position: relative;
         border: none;
+        max-width: 100%;
+        width: 100%;
 
         &--active {
             //css for onboard tour overlay
@@ -53,10 +55,10 @@
 
             &__list {
                 background: var(--general-main-16);
+                justify-content: start;
                 justify-content: flex-start !important;
                 margin-left: 0;
-                padding-left: 1.6rem;
-                flex-wrap: wrap;
+                padding-left: 0;
 
                 @include mobile-or-tablet-screen {
                     overflow-x: auto;
