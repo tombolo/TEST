@@ -22,6 +22,51 @@
     }
 }
 
+// Background elements
+.backgroundElements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floatingOrb1, .floatingOrb2, .floatingOrb3 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.1;
+}
+
+.floatingOrb1 {
+    width: 200px;
+    height: 200px;
+    background: var(--primary);
+    top: 20%;
+    left: 10%;
+    animation: floatOrb 8s infinite ease-in-out;
+}
+
+.floatingOrb2 {
+    width: 150px;
+    height: 150px;
+    background: var(--accent);
+    top: 60%;
+    right: 10%;
+    animation: floatOrb 6s infinite ease-in-out reverse;
+}
+
+.floatingOrb3 {
+    width: 100px;
+    height: 100px;
+    background: var(--secondary);
+    bottom: 20%;
+    left: 20%;
+    animation: floatOrb 10s infinite ease-in-out;
+}
+
 // Loading container
 .loadingContainer {
     display: flex;
@@ -30,7 +75,7 @@
     gap: 2.5rem;
     padding: 2.5rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -45,6 +90,7 @@
     align-items: center;
     margin-bottom: 1rem;
     will-change: transform;
+    position: relative;
     
     .logo {
         width: 100%;
@@ -52,6 +98,185 @@
         object-fit: contain;
         filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.2));
         user-select: none;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .logoGlow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        opacity: 0.3;
+        filter: blur(10px);
+        animation: pulseGlow 3s infinite ease-in-out;
+    }
+}
+
+// Text Display
+.textDisplay {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.textContainer {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+// Partnership Text Styling
+.partnershipText {
+    .partnershipContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        
+        .prefix {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .companyName {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, var(--gold), transparent);
+                animation: shimmerLine 2s infinite;
+            }
+        }
+        
+        .partnershipBadge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+// Powered By Text Styling
+.poweredText {
+    .poweredContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        
+        .prefix {
+            font-size: 1rem;
+            color: var(--silver);
+            opacity: 0.8;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .techName {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--silver) 0%, #E8E8E8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding: 0 0.5rem;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(255, 255, 255, 0.2) 50%, 
+                    transparent 100%);
+                animation: techShimmer 3s infinite;
+            }
+        }
+    }
+}
+
+// Journey Text Styling
+.journeyText {
+    .journeyContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        
+        .journeyText {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+        
+        .highlightText {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(
+                135deg,
+                var(--primary) 0%,
+                var(--accent) 50%,
+                var(--secondary) 100%
+            );
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent
+                );
+                animation: shine 3s infinite;
+            }
+        }
     }
 }
 
@@ -92,19 +317,21 @@
     transition: box-shadow 0.3s ease;
     transform: translateZ(0);
     
-    // Animated particles
-    &::before {
-        content: '';
+    // Animated particles container
+    .progressParticles {
         position: absolute;
-        top: -2px;
-        right: -5px;
-        width: 10px;
-        height: 10px;
+        top: -5px;
+        right: 0;
+        display: flex;
+        gap: 4px;
+    }
+    
+    .particle {
+        width: 4px;
+        height: 4px;
         background: white;
         border-radius: 50%;
-        filter: blur(2px);
-        animation: floatParticles 2s infinite ease-in-out;
-        opacity: 0.8;
+        filter: blur(0.5px);
     }
     
     // Glow effect
@@ -178,7 +405,60 @@
     }
 }
 
-// Animations
+// New Animations
+@keyframes floatOrb {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+        transform: translateY(0) translateX(20px);
+    }
+    75% {
+        transform: translateY(20px) translateX(10px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.2;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes shimmerLine {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes techShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
 @keyframes shimmer {
     0% {
         transform: translateX(-100%);
@@ -196,21 +476,6 @@
     50% {
         opacity: 1;
         box-shadow: 0 0 15px 4px rgba(255, 255, 255, 1);
-    }
-}
-
-@keyframes floatParticles {
-    0% {
-        transform: translate(0, 0) scale(0.8);
-        opacity: 0.8;
-    }
-    50% {
-        transform: translate(5px, -5px) scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(10px, -10px) scale(0.8);
-        opacity: 0;
     }
 }
 
@@ -233,6 +498,23 @@
     .logoContainer {
         width: 80px;
         height: 80px;
+    }
+    
+    .textDisplay {
+        height: 100px;
+    }
+    
+    .textContainer {
+        font-size: 1.1rem;
+    }
+    
+    .partnershipText .partnershipContent .companyName,
+    .poweredText .poweredContent .techName {
+        font-size: 1.6rem;
+    }
+    
+    .journeyText .journeyContent .highlightText {
+        font-size: 1.4rem;
     }
     
     .progressBar {
