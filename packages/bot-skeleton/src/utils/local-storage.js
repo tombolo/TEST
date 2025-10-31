@@ -18,6 +18,9 @@ import EVENODDTRADERBOT from './bots/EVEN-ODDTRADERBOT.xml';
 import ExpertSpeedBotByCHOSENDOLLARPRINTERFx from './bots/ExpertSpeedBotByCHOSENDOLLARPRINTERFx.xml';
 import AUTOC4VOLTAIPREMIUMROBOT from './bots/AUTOC4VOLTAIPREMIUMROBOT.xml';
 import MASTERBOTV6UPGRADEDDBot from './bots/MASTERBOTV6UPGRADEDDBot.xml';
+import AlgoSniper from './bots/AlgoSniper.xml';
+import ExpertSpeedBot from './bots/ExpertSpeedBot.xml';
+import SignalSniperAutoBot from './bots/SignalSniperAutoBot.xml';
 
 
 // Ensure Blockly is available globally
@@ -97,6 +100,27 @@ const STATIC_BOTS = {
         id: 'market_killer',
         name: 'Market Killer',
         xml: Marketkiller,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    algo_sniper: {
+        id: 'algo_sniper',
+        name: 'Algo Sniper',
+        xml: AlgoSniper,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    expert_speed_bot: {
+        id: 'expert_speed_bot',
+        name: 'Expert Speed Bot',
+        xml: ExpertSpeedBot,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    signal_sniper_auto_bot: {
+        id: 'signal_sniper_auto_bot',
+        name: 'Signal Sniper Auto Bot',
+        xml: SignalSniperAutoBot,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     },

@@ -8,7 +8,7 @@ export type TSidebarItem = {
 
 export const SIDEBAR_INTRO: TSidebarItem[] = [
     {
-        label: localize('Welcome to ANALYTICS PRO'),
+        label: localize('Welcome to DOLLAR MINER'),
         content: [
             {
                 data: localize(

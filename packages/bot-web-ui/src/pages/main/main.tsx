@@ -24,8 +24,9 @@ import Copytrading from '../copytrading';
 import Botlist from '../botlist';
 import Smartedge from '../smartedge';
 import Signals from '../signals';
-import { FaChartBar, FaChartLine, FaPuzzlePiece, FaChessKnight, FaUsers, FaShieldAlt, FaRobot, FaTachometerAlt, FaExchangeAlt, FaCopy, FaLightbulb } from 'react-icons/fa';
+import { FaChartBar, FaChartLine, FaPuzzlePiece, FaChessKnight, FaUsers, FaShieldAlt, FaRobot, FaTachometerAlt, FaExchangeAlt, FaCopy, FaLightbulb, FaChartPie } from 'react-icons/fa';
 import { MdSchema, MdGridOn } from 'react-icons/md';
+import Pro from '../pro';
 
 
 const AppWrapper = observer(() => {
@@ -280,6 +281,18 @@ const AppWrapper = observer(() => {
                             <Signals />
                         </div>
 
+                        <div
+                            label={
+                                <span style={{ color: '#ffffff', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', fontSize: '12px' }}>
+                                    <FaChessKnight size={14} />
+                                    Pro Tool
+                                </span>
+                            }
+                            id='id-pro-tool'
+                        >
+                            <Pro />
+                        </div>
+
 
 
                     </Tabs>
@@ -295,7 +308,7 @@ const AppWrapper = observer(() => {
                     <TradingViewModal />
                 </>
             ) : (
-                !is_open && active_tab !== 4 && <RunPanel />
+                <RunPanel />
             )}
             <Dialog
                 cancel_button_text={cancel_button_text || localize('Cancel')}
